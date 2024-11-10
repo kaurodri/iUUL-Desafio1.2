@@ -10,11 +10,11 @@ class Paciente {
     }
 
     cadastrarPaciente(cpf, nome, dataNascimento) {
-        const cadastro = new VerificarDadosPaciente();
+        const verificando = new VerificarDadosPaciente();
 
-        const CPF = cadastro.validarCPF(cpf);
-        const NOME = cadastro.validarNome(nome);
-        const NASCIMENTO = cadastro.validarDataNascimento(dataNascimento);
+        const CPF = verificando.validarCPF(cpf);
+        const NOME = verificando.validarNome(nome);
+        const NASCIMENTO = verificando.validarDataNascimento(dataNascimento);
         const EXISTENTE = this.verificarCPFExistente(cpf);
 
         if(CPF.verificar && NOME.verificar && NASCIMENTO.verificar && !EXISTENTE) {
