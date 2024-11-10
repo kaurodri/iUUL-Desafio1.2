@@ -1,3 +1,5 @@
+import { DateTime } from 'luxon';
+
 class VerificarDadosPaciente {
     validarCPF(CPF) {
         if (CPF.length !== 11 || /^(\d)\1{10}$/.test(CPF)) {
