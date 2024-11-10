@@ -1,7 +1,5 @@
 class VerificarDadosPaciente {
     validarCPF(CPF) {
-        CPF = CPF.replace(/[^\d]+/g, '');
-    
         if (CPF.length !== 11 || /^(\d)\1{10}$/.test(CPF)) {
             return {
                 verificar: false,
