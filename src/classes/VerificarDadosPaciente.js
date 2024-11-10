@@ -41,22 +41,24 @@ class VerificarDadosPaciente {
     }
 
     validarDataNascimento(dataNascimento) {
-        const regex = /^(\d{2})\/(\d{2})\/(\d{4})$/;
-        const match = dataNascimento.match(regex);
-        if (!match) {
+        const formato = 'dd/MM/yyyy';
+        const dataNascimentoObj = DateTime.fromFormat(dataNascimento, formato);
+
+        if (!dataNascimentoObj.isValid) {
             return {
                 verificar: false,
                 mensagem: 'Formatação de Data Inválida'
             };
         }
 
-        const [_, dia, mes, ano] = match;
-        const dataNascimentoObj = new Date(`${ano}-${mes}-${dia}`);
-        const idade = new Date().getFullYear() - dataNascimentoObj.getFullYear();
-        const mesAtual = new Date().getMonth() + 1;
-        const diaAtual = new Date().getDate();
+        const hoje = DateTime.now();
+        const idade = hoje.diff(dataNascimentoObj, 'years').years;
+        const mesAtual = hoje.month;
+        const diaAtual = hoje.day;
+        const mesNascimento = dataNascimentoObj.month;
+        const diaNascimento = dataNascimentoObj.day;
 
-        let verificar = idade < 13 || (idade === 13 && (mesAtual < mes || (mesAtual === mes && diaAtual < dia)));
+        let verificar = idade < 13 || (idade === 13 && (mesAtual < mesNascimento || (mesAtual === mesNascimento && diaAtual < diaNascimento)));
         return {
             verificar: !verificar,
             mensagem: verificar ? 'Idade Insuficiente' : 'Idade Suficiente'
