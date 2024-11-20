@@ -45,15 +45,7 @@ function obterMenu(tela, escolha) {
 }
 
 let tela = 0;
-let teste = true;
-while (teste == true) {
-    if (tela == 9) break;
-    let menuAtual = menus[tela].mensagem;
-    console.log(menuAtual);
-    let escolha = Number(entrada(`Sua escolha: `));
-    tela = obterMenu(tela, escolha);
-    console.log('');
-
+while (true) {
     if (tela == 3) {
         let cpf = entrada(`CPF: `);
         let nome = entrada(`Nome: `);
@@ -62,19 +54,28 @@ while (teste == true) {
         let conteudo = `\n${cadastro.cadastrarPaciente(cpf, nome, data).mensagem}.\n`;
         console.log(conteudo);
         
-        let final = entrada(`Voltar pro Menu Principal? [ s / n ]: `);
-        tela = (final == 's') ? 0 : 9;
+        let gg = entrada(`Adicionar outro paciente? [ s / n ]: `);
+        if (gg == 'n') {
+            let final = entrada(`Voltar pro Menu Principal? [ s / n ]: `);
+            tela = (final == 's') ? 0 : 9;
+        } else if (gg == 's') {
+            tela = 3;
+        }
 
     } else if (tela == 5) {
-        const colunas = `${`CPF`.padEnd(12)} ${`Nome`.padEnd(20)} ${`Dt.Nasc.`.padEnd(10)} ${`Idade`.padEnd(5)}`;
-        const separator = `-`.padEnd(50, '-');
-        console.log(separator);
-        console.log(colunas);
-        console.log(separator);
-        console.log( cadastro.listarPacientes() );
+
+        cadastro.imprimirPorNome();
 
         let final = entrada(`Voltar pro Menu Principal? [ s / n ]: `);
         tela = (final == 's') ? 0 : 9;
         
-    };
+    } else if (tela == 9) {
+        break;
+    } else {
+        let menuAtual = menus[tela].mensagem;
+        console.log(menuAtual);
+        let escolha = Number(entrada(`Sua escolha: `));
+        tela = obterMenu(tela, escolha);
+        console.log('');
+    }
 };
