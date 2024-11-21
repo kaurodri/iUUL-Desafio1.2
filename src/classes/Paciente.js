@@ -1,4 +1,5 @@
 import VerificarDadosPaciente from './VerificarDadosPaciente.js';
+import ListagemPaciente from './ListagemPaciente.js';
 
 class Paciente {
     constructor() {
@@ -33,7 +34,11 @@ class Paciente {
     }
 
     listarPacientes() {
-        return this.pacientes;
+        const listar = new ListagemPaciente();
+        return {
+            porNome: listar.imprimirPorNome(this.pacientes),
+            porCPF: listar.imprimirPorCPF(this.pacientes)
+        };
     }
 }
 
