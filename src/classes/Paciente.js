@@ -33,6 +33,38 @@ class Paciente {
         }
     }
 
+    excluirPaciente(cpf, agendamentos) {
+        if (!this.verificarCPFExistente(cpf)) {
+            return {
+                verificar: false,
+                mensagem: 'Erro: paciente não cadastrado'
+            };
+        }
+
+        const pacienteAgendamentosFuturos = agendamentos.some(agendamento => 
+            agendamento.cpf === cpf && DateTime.fromFormat(agendamento.dataConsulta, 'dd/MM/yyyy') > DateTime.now()
+        );
+
+        if (pacienteAgendamentosFuturos) {
+            return {
+                verificar: false,
+                mensagem: 'Erro: paciente está agendado.'
+            };
+        }
+
+        const agendamentosPassados = agendamentos.filter(agendamento => agendamento.cpf === cpf && DateTime.fromFormat(agendamento.dataConsulta, 'dd/MM/yyyy') < DateTime.now());
+
+        agendamentos = agendamentos.filter(agendamento => !agendamentosPassados.includes(agendamento));
+
+        const pacienteIndex = this.pacientes.findIndex(paciente => paciente.cpf === cpf);
+        this.pacientes.splice(pacienteIndex, 1);
+
+        return {
+            verificar: true,
+            mensagem: 'Paciente excluído com sucesso!'
+        };
+    }
+
     listarPacientes() {
         const listar = new ListagemPaciente();
         return {

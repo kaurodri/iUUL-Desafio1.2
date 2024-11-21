@@ -26,7 +26,7 @@ const menus = [
 // 1 -> Menu do Cadastro de Pacientes
 // 2 -> Menu da Agenda
 // 3 -> Cadastrar novo paciente
-//! 4 -> Excluir paciente
+// 4 -> Excluir paciente
 // 5 -> Listar pacientes (ordenado por CPF)
 // 6 -> Listar pacientes (ordenado por nome)
 // 7 -> Agendar Consulta
@@ -50,15 +50,7 @@ function obterMenu(tela, escolha) {
 
 let tela = 0;
 while (true) {
-    
-    if (tela == 0 || tela == 1 || tela == 2) {
-        let menuAtual = menus[tela].mensagem;
-        console.log(menuAtual);
-        let escolha = Number(entrada(`Sua escolha: `));
-        tela = obterMenu(tela, escolha);
-        console.log('');
-
-    } else if (tela == 3) {
+    if (tela == 3) {
         let cpf = entrada(`CPF: `);
         let nome = entrada(`Nome: `);
         let data = entrada(`Data de nascimento: `);
@@ -71,6 +63,23 @@ while (true) {
         switch (adicionar) {
             case 's':
                 tela = 3;
+                break;
+            case 'n':
+                let final = entrada(`Voltar pro Menu Principal? [ s / n ]: `);
+                tela = (final === 's') ? 0 : 9;
+                break;
+        }
+
+    } else if (tela == 4) {
+        let cpf = entrada(`CPF: `);
+        let imprimir = cadastro.excluirPaciente(cpf, consulta.listarAgendamentos()).mensagem;
+        console.log(imprimir);
+
+        let adicionar = entrada(`Excluir outro paciente? [ s / n ]: `);
+
+        switch (adicionar) {
+            case 's':
+                tela = 4;
                 break;
             case 'n':
                 let final = entrada(`Voltar pro Menu Principal? [ s / n ]: `);
@@ -151,9 +160,10 @@ while (true) {
         break;
 
     } else {
-        console.log(`Parte em Manutenção.`);
-        console.log(`-`.padEnd(12, '-'));
-        let final = entrada(`Voltar pro Menu Principal? [ s / n ]: `);
-        tela = (final == 's') ? 0 : 9;
+        let menuAtual = menus[tela].mensagem;
+        console.log(menuAtual);
+        let escolha = Number(entrada(`Sua escolha: `));
+        tela = obterMenu(tela, escolha);
+        console.log('');
     }
 };
