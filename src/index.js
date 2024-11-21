@@ -1,4 +1,4 @@
-import { VerificarDadosPaciente, Paciente, Agendamento } from './classes/index.js';
+import { Paciente, Agendamento } from './classes/index.js';
 import promptSync from 'prompt-sync';
 
 const entrada = promptSync({ sigint: true });
@@ -31,7 +31,7 @@ const menus = [
 // 6 -> Listar pacientes (ordenado por nome)
 // 7 -> Agendar Consulta
 //! 8 -> Cancelar Agendamento
-//! 10 -> Listar Agenda
+// 10 -> Listar Agenda
 
 function obterMenu(tela, escolha) {
     if (tela === 0 && escolha === 1) return 1;
@@ -107,7 +107,14 @@ while (true) {
                 tela = (final === 's') ? 0 : 9;
                 break;
         }
+    } else if (tela == 10) {
         
+        let imprimir = consulta.listarAgenda(cadastro.dadosPacientes());
+        console.log(imprimir);
+
+        let final = entrada(`Voltar pro Menu Principal? [ s / n ]: `);
+        tela = (final == 's') ? 0 : 9;
+
     } else if (tela == 9) {
         break;
 

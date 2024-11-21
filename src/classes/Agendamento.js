@@ -1,5 +1,5 @@
 import { ValidarAgendamento } from './ValidarAgendamento.js';
-import Paciente from './Paciente.js';
+import ListagemAgenda from './ListagemAgenda.js';
 
 class Agendamento {
     constructor(pacienteService) {
@@ -40,8 +40,9 @@ class Agendamento {
         return this.agendamentos;
     }
 
-    listarPacientes() {
-        return this.pacienteService.listarPacientes();
+    listarAgenda(pacientes) {
+        const listar = new ListagemAgenda();
+        return listar.imprimir(this.agendamentos, pacientes);
     }
 }
 

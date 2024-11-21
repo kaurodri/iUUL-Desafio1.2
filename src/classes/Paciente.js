@@ -40,6 +40,10 @@ class Paciente {
             porCPF: listar.imprimirPorCPF(this.pacientes)
         };
     }
+
+    dadosPacientes() {
+        return this.pacientes;
+    }
 }
 
 export default Paciente;
