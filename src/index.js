@@ -62,15 +62,17 @@ while (true) {
             tela = 3;
         }
 
-    } else if (tela == 5) {
+    } else if (tela == 5 || tela == 6) {
 
-        cadastro.imprimirPorNome();
+        let imprimir = (tela == 5) ? cadastro.listarPacientes().porCPF : cadastro.listarPacientes().porNome;
+        console.log(imprimir);
 
         let final = entrada(`Voltar pro Menu Principal? [ s / n ]: `);
         tela = (final == 's') ? 0 : 9;
-        
+
     } else if (tela == 9) {
         break;
+        
     } else {
         let menuAtual = menus[tela].mensagem;
         console.log(menuAtual);
