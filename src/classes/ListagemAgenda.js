@@ -8,7 +8,7 @@ class ListagemAgenda {
         let conteudo = '';
         conteudo += `${separator}\n${colunas}\n${separator}`;
 
-        ListaPacientes.sort((a, b) => a.nome.localeCompare(b.nome))
+        ListaPacientes.sort((a, b) => a.dataConsulta.localeCompare(b.dataConsulta))
             .forEach(dados => {
 
                 function formatarHora(num) {
