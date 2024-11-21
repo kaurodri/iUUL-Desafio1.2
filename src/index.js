@@ -30,7 +30,7 @@ const menus = [
 // 5 -> Listar pacientes (ordenado por CPF)
 // 6 -> Listar pacientes (ordenado por nome)
 // 7 -> Agendar Consulta
-//! 8 -> Cancelar Agendamento
+// 8 -> Cancelar Agendamento
 // 10 -> Listar Agenda
 
 function obterMenu(tela, escolha) {
@@ -112,6 +112,33 @@ while (true) {
                 tela = (final === 's') ? 0 : 9;
                 break;
         }
+    } else if (tela == 8) {
+
+        let cpf = entrada(`CPF: `);
+        let ver = cadastro.verificarCPFExistente(cpf);
+        let gg = (ver == true) ? 'Paciente encontrado!' : 'Erro: paciente não cadastrado';
+        console.log(`\n${gg}\n`);
+
+        if (ver) {
+            let dataConsulta = entrada(`Data da consulta: `);
+            let horaInicial = entrada(`Hora inicial: `);
+
+            let imprimir = consulta.cancelarAgendamento(cpf, dataConsulta, horaInicial).mensagem;
+            console.log(`\n${imprimir}\n`);
+        }
+
+        let adicionar = entrada(`Cancelar outro agendamento? [ s / n ]: `);
+
+        switch (adicionar) {
+            case 's':
+                tela = 8;
+                break;
+            case 'n':
+                let final = entrada(`Voltar pro Menu Principal? [ s / n ]: `);
+                tela = (final === 's') ? 0 : 9;
+                break;
+        }
+
     } else if (tela == 10) {
         
         let imprimir = consulta.listarAgenda(cadastro.dadosPacientes());
