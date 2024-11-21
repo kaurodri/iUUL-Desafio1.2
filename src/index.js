@@ -50,7 +50,15 @@ function obterMenu(tela, escolha) {
 
 let tela = 0;
 while (true) {
-    if (tela == 3) {
+    
+    if (tela == 0 || tela == 1 || tela == 2) {
+        let menuAtual = menus[tela].mensagem;
+        console.log(menuAtual);
+        let escolha = Number(entrada(`Sua escolha: `));
+        tela = obterMenu(tela, escolha);
+        console.log('');
+
+    } else if (tela == 3) {
         let cpf = entrada(`CPF: `);
         let nome = entrada(`Nome: `);
         let data = entrada(`Data de nascimento: `);
@@ -69,9 +77,6 @@ while (true) {
                 tela = (final === 's') ? 0 : 9;
                 break;
         }
-
-    } else if (tela == 4) {
-        let cpf = entrada(`CPF: `);
 
     } else if (tela == 5 || tela == 6) {
 
@@ -119,10 +124,9 @@ while (true) {
         break;
 
     } else {
-        let menuAtual = menus[tela].mensagem;
-        console.log(menuAtual);
-        let escolha = Number(entrada(`Sua escolha: `));
-        tela = obterMenu(tela, escolha);
-        console.log('');
+        console.log(`Parte em Manutenção.`);
+        console.log(`-`.padEnd(12, '-'));
+        let final = entrada(`Voltar pro Menu Principal? [ s / n ]: `);
+        tela = (final == 's') ? 0 : 9;
     }
 };
