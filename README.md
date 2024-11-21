@@ -1,4 +1,6 @@
-# iUUL-Desafio1.2
+# Desafio #1.2 - Administração da Agenda de um Consultório Odontológico
+**Formação Back-End - Node.js / Express**
+
 
 O projeto desenvolvido consiste em um sistema para gerenciamento de pacientes e agendamentos de consultas. A estrutura do sistema foi organizada em várias classes, com o objetivo de garantir a validação dos dados inseridos e a facilidade de gerenciamento das informações.
 
